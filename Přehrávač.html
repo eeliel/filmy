@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Přehrávač seriálu</title>
+  <style>
+    body {
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    
+    video {
+      width: 80%;
+      height: auto;
+    }
+    
+    #next-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #222;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    #next-button:hover {
+      background-color: #444;
+    }
+    
+    .episode-button {
+      margin-right: 10px;
+      background-color: #222;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .episode-button:hover {
+      background-color: #444;
+    }
+    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      padding: 12px 16px;
+      z-index: 1;
+    }
+    
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  
+  
+  <div class="dropdown">
+    <button class="episode-button">Vyberte epizodu</button>
+    <div class="dropdown-content">
+   
+ <button onclick="spawnIframe()">Epizoda 1</button>
+     <button onclick="spawnIframe('https://karmidaro.com/e/b6ssowd92npy')">Epizoda 2</button>
+<button class="episode-button" onclick="spawnIframe('Srdcerváči Heartstopper 2022 FULL HD CZ Dabing S01E03.mp4')">Epizoda 3</button>
+<button class="episode-button" onclick="spawnIframe('Srdcerváči Heartstopper 2022 FULL HD CZ Dabing S01E04.mp4')">Epizoda 4</button>
+<button class="episode-button" onclick="spawnIframe('Srdcerváči Heartstopper 2022 FULL HD CZ Dabing S01E05.mp4')">Epizoda 5</button>
+<button class="episode-button" onclick="spawnIframe('Srdcerváči Heartstopper 2022 FULL HD CZ Dabing S01E06.mp4')">Epizoda 6</button>
+<button class="episode-button" onclick="spawnIframe('Srdcerváči Heartstopper 2022 FULL HD CZ Dabing S01E07.mp4')">Epizoda 7</button>
+<button class="episode-button" onclick="spawnIframe('Srdcerváči Heartstopper 2022 FULL HD CZ Dabing S01E08.mp4')">Epizoda 8</button>
+
+    </div>
+  </div>
+  
+  <a id="next-button" href="index.html">Zpět</a>
+  <div id="iframe-container"></div>
+  <script>
+    var videoPlayer = document.getElementById('video-player');
+    var episodeButtons = document.querySelectorAll('.episode-button');
+    var currentEpisodeIndex = 0;
+    
+    // Načtení indexu poslední přehrávané epizody ze stavu (localStorage)
+    if (localStorage.getItem('lastPlayedEpisodeIndex')) {
+      currentEpisodeIndex = parseInt(localStorage.getItem('lastPlayedEpisodeIndex'));
+    }
+    
+    function playEpisode(index) {
+      // Uložení indexu přehrávané epizody do stavu (localStorage)
+      localStorage.setItem('lastPlayedEpisodeIndex', index);
+      
+      // Získání zdroje videa z atributu 'data-src' tlačítka epizody
+      var source = episodeButtons[index].getAttribute('data-src');
+      
+      // Nastavení zdroje videa
+      videoPlayer.src = source;
+      
+      // Spuštění přehrávání videa
+      videoPlayer.play();
+    }
+    
+    // Přidání posluchačského zařízení pro každé tlačítko s epizodou
+    episodeButtons.forEach(function(button, index) {
+      button.addEventListener('click', function() {
+        playEpisode(index);
+      });
+    });
+    
+    // Přidání posluchačského zařízení pro událost 'ended' na přehrávači videa
+    videoPlayer.addEventListener('ended', function() {
+      var nextEpisodeIndex = currentEpisodeIndex + 1;
+      if (nextEpisodeIndex < episodeButtons.length) {
+        playEpisode(nextEpisodeIndex);
+      }
+    });
+    
+    // Automatické spuštění přehrávání poslední přehrávané epizody
+    playEpisode(currentEpisodeIndex);
+ var currentIframe = null; // Globální proměnná pro uchování aktuálně zobrazeného iframe
+
+  function spawnIframe(src) {
+    // Skryj aktuální iframe, pokud existuje
+    if (currentIframe) {
+      currentIframe.style.display = 'none';
+    }
+
+    // Vytvoření iframe elementu
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://karmidaro.com/e/6alivmiid5dw';
+    iframe.scrolling = 'no';
+    iframe.frameBorder = '0';
+    iframe.width = '100%';
+    iframe.height = '100%';
+    iframe.allowfullscreen = 'true';
+    iframe.webkitallowfullscreen = 'true';
+    iframe.mozallowfullscreen = 'true';
+
+    // Přidání iframe do těla dokumentu
+    document.body.appendChild(iframe);
+  }
+
+  </script>
+</body>
+</html>

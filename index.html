@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Knihovna filmů</title>
+  <style>
+    body {
+      background-color: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start; /* Upraveno na flex-start */
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .header {
+      background-color: #333;
+      padding: 10px;
+      text-align: left;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .header span {
+      margin-left: 30px;
+    }
+    
+    .films-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      margin-top: 80px; /* Odsazení 5px od hlavičky */
+    }
+    
+    .film {
+      text-align: center;
+      margin: 20px;
+    }
+    
+    .film a {
+      text-decoration: none;
+    }
+    
+    .film img {
+      width: 100px;
+      height: auto;
+      border-radius: 5px;
+    }
+    
+    .film span {
+      color: #fff;
+      font-size: 18px;
+      display: block;
+      margin-top: 10px;
+    }
+    
+    .film p {
+      color: #fff;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+    
+    .search-container {
+      position: relative;
+      margin-top: 20px;
+      text-align: right;
+    }
+    
+    .search-container input[type="text"] {
+      padding: 6px;
+      border-radius: 5px;
+      border: none;
+    }
+    
+    .search-container button {
+      padding: 6px 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: #ccc;
+      color: #000;
+      cursor: pointer;
+    }
+    
+    .suggestions {
+      position: absolute;
+      top: 26px;
+      left: 0;
+      background-color: #333;
+      padding: 5px;
+      border-radius: 5px;
+      z-index: 1;
+      display: none;
+    }
+    
+    .suggestions div {
+      cursor: pointer;
+      margin-bottom: 5px;
+      color: #ccc;
+      font-size: 12px;
+    }
+    
+    .suggestions div:hover {
+      color: #fff;
+    }
+    
+    .login-container {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #fff;
+    }
+    
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+      padding: 5px;
+      border-radius: 5px;
+      border: none;
+      margin-right: 5px;
+    }
+    
+    .login-container button {
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: #ccc;
+      color: #000;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span>Knihovna</span>
+  </div>
+  
+  <div class="films-container">
+    <div class="film">
+      <a href="Přehrávač.html">
+        <img src="heart.jpg" alt="Film 1">
+      </a>
+      <p>Heartstopper</p>
+    </div>
+    
+    <div class="film">
+      <a href="zloba.html">
+        <img src="Zloba1.jpg" alt="Film 2">
+        
+      </a>
+      <p>Zloba 1</p>
+    </div>
+    
+    <div class="film">
+      <a href="zloba2.html">
+        <img src="zloba2.jpg" alt="Film 3">
+        
+      </a>
+      <p>Zloba 2</p>
+    </div>
+    <div class="film">
+      <a href="grinch.html">
+        <img src="grinch.jpg" alt="Film 3">
+        
+      </a>
+      <p>Grinch</p>
+    </div>
+   
+
+    <!-- Přidat další filmy jako další <div class="film"> bloky -->
+  </div>
+  
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Vyhledat film...">
+    <button onclick="searchFilms()">Vyhledat</button>
+    <div id="suggestions" class="suggestions"></div>
+  </div>
+
+  <div class="login-container">
+    <input type="text" id="username-input" placeholder="Uživatelské jméno">
+    <input type="password" id="password-input" placeholder="Heslo">
+    <button onclick="login()">Přihlásit</button>
+    <button onclick="register()">Registrovat</button>
+  </div>
+
+  <script>
+    function login() {
+      var username = document.getElementById('username-input').value;
+      var password = document.getElementById('password-input').value;
+      
+      // Zde by měla být implementace ověření přihlašovacích údajů v rámci webové aplikace nebo komunikace s serverem.
+      // V tomto příkladu jsou přihlašovací údaje tvrdě zakódovány pro ilustrační účely.
+      if (username === 'admin' && password === 'admin') {
+        alert('Přihlášení úspěšné!');
+        // Zde byste měli implementovat přesměrování na stránku s obsahem, na kterou je uživatel přihlášen.
+        // V tomto příkladu necháme uživatele na této stránce.
+      } else {
+        alert('Nesprávné přihlašovací údaje!');
+      }
+    }
+    
+    function register() {
+      var username = document.getElementById('username-input').value;
+      var password = document.getElementById('password-input').value;
+      
+      // Zde by měla být implementace registrace uživatele v rámci webové aplikace nebo komunikace s serverem.
+      // V tomto příkladu jsou přihlašovací údaje tvrdě zakódovány pro ilustrační účely.
+      alert('Registrace úspěšná!');
+    }
+
+    var films = [
+      'Letopisy Narnie 3',
+      'Zloba 1',
+      'Zloba 2'
+    ];
+    
+    var inputElement = document.getElementById('search-input');
+    var suggestionsContainer = document.getElementById('suggestions');
+    
+    inputElement.addEventListener('input', handleInput);
+    inputElement.addEventListener('blur', function() {
+      setTimeout(function() {
+        suggestionsContainer.style.display = 'none';
+      }, 200);
+    });
+    
+    function handleInput() {
+      var input = inputElement.value.toLowerCase();
+      var matches = [];
+      
+      if (input.length > 0) {
+        matches = films.filter(function(film) {
+          return film.toLowerCase().startsWith(input);
+        });
+      }
+      
+      if (matches.length > 0) {
+        var suggestions = matches.map(function(match) {
+          return '<div onclick="selectSuggestion(\'' + match + '\')">' + match + '</div>';
+        });
+        suggestionsContainer.innerHTML = suggestions.join('');
+        suggestionsContainer.style.display = 'block';
+      } else {
+        suggestionsContainer.innerHTML = '';
+        suggestionsContainer.style.display = 'none';
+      }
+    }
+    
+    function selectSuggestion(suggestion) {
+      inputElement.value = suggestion;
+      suggestionsContainer.innerHTML = '';
+    }
+    
+    function searchFilms() {
+      var searchValue = inputElement.value.toLowerCase();
+      var filmElements = document.querySelectorAll('.film');
+      
+      filmElements.forEach(function(element) {
+        var filmName = element.querySelector('p').textContent.toLowerCase();
+        
+        if (filmName.includes(searchValue)) {
+          element.style.display = 'block';
+        } else {
+          element.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
